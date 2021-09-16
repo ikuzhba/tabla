@@ -9,13 +9,13 @@ class Home extends GeneralController {
 		// other stuff here
 	}
 
-	function generate_for($x = 1, $to = 10) {
+	static function generate_for($x = 1, $to = 10) {
 		$out = [];
 		for($i=1; $i<=$to; $i++) {
 			$out[] = [
-				'a' => $x,
-				'b' => $i,
-				'c' => ($x * $i)
+				$x,
+				$i,
+				($x * $i)
 			];
 		}
 		return $out;
