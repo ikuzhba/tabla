@@ -15,7 +15,7 @@ if(count($uri)) {
 	$number = isset($uri[0]) ? intval($uri[0]): 0;
 	$multiply = isset($uri[1]) ? intval($uri[1]): 0;
 	$content = HomeController::generate_for($number, $multiply);
-	
+
 	$response = new Response(
 		json_encode($content),
 		Response::HTTP_OK,
@@ -27,7 +27,7 @@ if(count($uri)) {
 } else {
 	$controller = new HomeController('home/index.php');
 	$data = $controller->generate();
-	$content = $controller->view(['data'=>$data]);
+	$content = $controller->view([]);
 
 	$response = new Response(
 		$content,

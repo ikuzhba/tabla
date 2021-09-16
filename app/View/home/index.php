@@ -1,23 +1,27 @@
 <!-- <pre> -->
-	<input type="range" min="1" max="10" name="nb" onchange="update('nb')" oninput="input('nb')">
-	<input type="number" disabled="disabled" value="5" name="for-nb">
+	<?php echo phpversion() . '<br />'; ?>
+	<input type="range" min="1" max="10" value="5" name="nb" onchange="update()" oninput="input('nb')">
+	<input type="number" disabled="disabled" name="for-nb">
 	<br />
 
-	<input type="range" min="1" max="10" name="to" onchange="update('to')" oninput="input('to')">
-	<input type="number" disabled="disabled" value="5" name="for-to">
+	<input type="range" min="1" max="10" value="5" name="to" onchange="update()" oninput="input('to')">
+	<input type="number" disabled="disabled" name="for-to">
 	<br />
-	
-	<ul>
-	<?php foreach($data as $row): ?>
-		<li><?=$row[0]?> * <?=($row[1] < 10 ? '&nbsp;' . $row[1] : $row[1])?> = <?=$row[2]?></li>
-	<?php endforeach; ?>
+
+	<ul id="main">
 	</ul>
 	
+	<script src="/node_modules/jquery/dist/jquery.min.js"></script>
 
 	<script>
 		(function(){
 			console.log(new Date());
 		})();
+		$( document ).ready(function() {
+			input('nb');
+			input('to');
+			update();
+		});
 
 		function get_elements() {
 			let elements = {
@@ -32,10 +36,22 @@
 			document.querySelectorAll(`[name="for-${name}"]`)[0].value = elements[name].value;
 		}
 
-		function update(name) {
+		function update() {
 			let elements = get_elements();
-			console.log('change made');
-			// document.querySelectorAll(`[name="for-${name}"]`)[0].value = elements[name].value;
+			$.post(`/${elements.nb.value}/${elements.to.value}`, {}, function(response) {
+				render(response);
+			})
+		}
+
+		function render(data) {
+			let html = '';
+			for(let [a, b, c] of data) {
+				if(b < 10){
+					b = '&nbsp;' + b;
+				}
+				html += `<li>${a} * ${b} = ${c}</li>`;
+			}
+			$('ul#main').empty().append(html);
 		}
 	</script>
 <!-- <pre> -->
