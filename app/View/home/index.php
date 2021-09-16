@@ -8,50 +8,8 @@
 	<input type="number" disabled="disabled" name="for-to">
 	<br />
 
-	<ul id="main">
-	</ul>
+	<ul id="main"></ul>
 	
 	<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-
-	<script>
-		(function(){
-			console.log(new Date());
-		})();
-		$( document ).ready(function() {
-			input('nb');
-			input('to');
-			update();
-		});
-
-		function get_elements() {
-			let elements = {
-				nb: document.querySelectorAll('[name="nb"]')[0],
-				to: document.querySelectorAll('[name="to"]')[0]
-			};
-			return elements;
-		}
-
-		function input(name) {
-			let elements = get_elements();
-			document.querySelectorAll(`[name="for-${name}"]`)[0].value = elements[name].value;
-		}
-
-		function update() {
-			let elements = get_elements();
-			$.post(`/${elements.nb.value}/${elements.to.value}`, {}, function(response) {
-				render(response);
-			})
-		}
-
-		function render(data) {
-			let html = '';
-			for(let [a, b, c] of data) {
-				if(b < 10){
-					b = '&nbsp;' + b;
-				}
-				html += `<li>${a} * ${b} = ${c}</li>`;
-			}
-			$('ul#main').empty().append(html);
-		}
-	</script>
+	<script src="/app/src/js/script.js"></script>
 <!-- <pre> -->
