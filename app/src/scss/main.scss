@@ -1,0 +1,10 @@
+body {
+	background: blue;
+	color: yellow;
+	&>div {
+		display: block;
+	}
+	div {
+		display: inline-block;
+	}
+}

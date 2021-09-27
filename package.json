@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/ikuzhba/tabla#readme",
   "dependencies": {
+    "browser-sync": "^2.27.5",
+    "gulp": "^4.0.2",
     "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.41.0"
   }
 }
